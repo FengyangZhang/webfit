@@ -4,17 +4,31 @@ import Player from './../ui/Player';
 
 export default class Playerlist extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            kg: ""
+        };
+    }
+
     renderlbkg(){
         return(
             
             <div className = "lb2kg">          
        
-            <input className="input" type = "text" name = "lb" placeholder = "lb" />
-            <button className="button--round">to</button>
-            <input className="input" type = "text" name = "kg" placeholder = "kg" />
+            <input className="input" type = "text" name = "lb" placeholder = "lb" ref={input => this.input=input}/>
+            <button className="button--round" onClick={this.updateKg.bind(this)}>to</button>
+            <input className="input" type = "text" name = "kg" placeholder = "kg" value={this.state.kg}/>
             </div>
         );
 
+    }
+
+    updateKg() {
+        const lb_value = this.input.value;
+        this.setState({
+            kg: lb_value/2
+        });
     }
   
     
