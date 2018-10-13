@@ -7,28 +7,49 @@ export default class Playerlist extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            kg: ""
+            kg: "",
+            lb: ""
         };
+        this.handleChangeKg = this.handleChangeKg.bind(this);
+        this.handleChangeLb = this.handleChangeLb.bind(this);
     }
-
+      
     renderlbkg(){
         return(
             
             <div className = "lb2kg">          
        
-            <input className="input" type = "text" name = "lb" placeholder = "lb" ref={input => this.input=input}/>
-            <button className="button--round" onClick={this.updateKg.bind(this)}>to</button>
-            <input className="input" type = "text" name = "kg" placeholder = "kg" value={this.state.kg}/>
+            <input className="input" type = "text" name = "lb" 
+                placeholder = "lb" ref={lb_value=>this.lb_value=lb_value} value={this.state.lb}
+                onChange={this.handleChangeLb.bind(this)}/>
+            <button className="button--round" onClick={this.updateKgAndLb.bind(this)}>to</button>
+            <input className="input" type = "text" name = "kg"
+                placeholder = "kg" ref={kg_value=>this.kg_value=kg_value} value={this.state.kg}
+                onChange={this.handleChangeKg.bind(this)} />
             </div>
         );
 
     }
+    handleChangeKg(event){
+        this.setState({kg: event.target.value});
+    }
+    handleChangeLb(event){
+        this.setState({lb: event.target.value});
+    }
 
-    updateKg() {
-        const lb_value = this.input.value;
-        this.setState({
-            kg: lb_value/2
-        });
+    updateKgAndLb() {
+        const lb_value = this.lb_value.value;
+        const kg_value = this.kg_value.value;
+        if(kg_value == 0) {
+            this.setState({
+                kg: lb_value/2
+            });
+        }
+        else if(lb_value == 0) {
+            this.setState({
+                lb: kg_value*2
+            });
+        }
     }
   
     
