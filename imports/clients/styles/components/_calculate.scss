@@ -1,0 +1,27 @@
+.calForm p{
+    width: 400px;
+    display: block;
+    margin:5px 0;
+    text-align: center;
+    padding-left: 50px
+}
+.calForm label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    padding-right: 25px;
+    padding-top: 10px;
+}
+.calForm input{
+    vertical-align: top;
+    width: 150px;
+    &:focus{
+        transform: scale(1.2);
+    }
+    font-size: 20px;
+}
+
+.calculator{
+    background-color: #fff;
+    border-radius: 20px;
+}
