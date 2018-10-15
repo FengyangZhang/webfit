@@ -15,13 +15,19 @@
 .calForm input{
     vertical-align: top;
     width: 150px;
-    &:focus{
-        transform: scale(1.2);
-    }
+    // &:focus{
+    //     transform: scale(1.2);
+    // }
     font-size: 20px;
 }
 
 .calculator{
     background-color: #fff;
     border-radius: 20px;
+}
+
+.calForm input[type="reset"]{
+    vertical-align: top;
+    width: 150px;
+    float: right;
 }
