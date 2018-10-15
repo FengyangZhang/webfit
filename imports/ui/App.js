@@ -1,7 +1,6 @@
 import React from 'react';
 import TitleBar from './../ui/TitleBar';
-import Playerlist from './../ui/Playerlist';
-import AddPlayer from './../ui/AddPlayer';
+import MainPanel from './../ui/MainPanel';
 
 export default class App extends React.Component{
     render(){
@@ -9,8 +8,7 @@ export default class App extends React.Component{
             <div>
             <TitleBar title = {this.props.title}/>
             <div className = "wrapper">       
-            <Playerlist players = {this.props.players}/>              
-            
+            <MainPanel panel/>
             </div>
         </div>
         );
