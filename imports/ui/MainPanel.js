@@ -25,14 +25,17 @@ class Converter extends React.Component{
     handleClick() {
         let leftval = parseFloat(this.state.leftval);
         let rightval = parseFloat(this.state.rightval);
-        if (leftval && rightval) {
-            return
-        }
-        else if (leftval) {
+        if (leftval) {
             if (this.leftType=="kg" && this.rightType=="lb") {
                 this.setState({
                     leftval: leftval,
                     rightval: leftval * 2.20462
+                })
+            }
+            else if (this.leftType=="cm" && this.rightType=="inch") {
+                this.setState({
+                    leftval: leftval,
+                    rightval: leftval * 0.393701
                 })
             }
         }
@@ -40,6 +43,12 @@ class Converter extends React.Component{
             if (this.leftType=="kg" && this.rightType=="lb") {
                 this.setState({
                     leftval: rightval / 2.20462,
+                    rightval: rightval,
+                })
+            }
+            else if (this.leftType=="cm" && this.rightType=="inch") {
+                this.setState({
+                    leftval: rightval / 0.393701,
                     rightval: rightval,
                 })
             }
@@ -90,6 +99,7 @@ export default class Playerlist extends React.Component{
         return (
             <div>
                 {this.renderConverter(0, "kg", "lb")}
+                {this.renderConverter(1, "cm", "inch")}
                 {/* {this.renderCalculate()} */}
             </div>
         );
