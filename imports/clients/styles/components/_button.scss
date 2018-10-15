@@ -1,4 +1,4 @@
-.button{
+.convertButton{
     background: white;
     border: 1px solid #555555;
     color: #555555;
@@ -9,22 +9,19 @@
     outline: none;
     padding:0.3rem;
     transition: transform .2s ease;
+    border-radius: 50%;
+    height:4rem;
+    width:4rem;
 
-    &:hover, &:focus{
-        background: #e8e8e8;
+    &:hover{
+        background: #888888;
     }
 
     &:active{
         //when you click it, it goes to be darker.
-        background: #dddddd;
-        transform: scale(1.05);
+        background: #888888;
+        transform: scale(1.2);
     }
-}
-
-.convert{
-    border-radius: 50%;
-    height:4rem;
-    width:4rem;
 }
 
 

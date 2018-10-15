@@ -23,8 +23,8 @@ class Converter extends React.Component{
     }
 
     handleClick() {
-        let leftval = parseFloat(this.state.leftval);
-        let rightval = parseFloat(this.state.rightval);
+        let leftval = this.state.leftval;
+        let rightval = this.state.rightval;
         if (leftval) {
             if (this.leftType=="kg" && this.rightType=="lb") {
                 this.setState({
@@ -39,7 +39,7 @@ class Converter extends React.Component{
                 })
             }
         }
-        else {
+        else if (rightval) {
             if (this.leftType=="kg" && this.rightType=="lb") {
                 this.setState({
                     leftval: rightval / 2.20462,
@@ -53,15 +53,18 @@ class Converter extends React.Component{
                 })
             }
         }
+        else {
+            return;
+        }
     }
     render() {
         return(
             <div>          
-                <input className="input" type = "text" value={this.state.leftval}
+                <input className="convertInput" type = "text" value={this.state.leftval}
                     onChange ={this.handleLeftChange}
                     placeholder = {this.props.left}/>
-                <button className="convert" onClick={this.handleClick}>to</button>
-                <input className="input" type = "text" value={this.state.rightval}
+                <button className="convertButton" onClick={this.handleClick}>to</button>
+                <input className="convertInput" type = "text" value={this.state.rightval}
                     onChange ={this.handleRightChange}
                     placeholder = {this.props.right}/>
             </div>
@@ -69,7 +72,7 @@ class Converter extends React.Component{
     }
 }
 
-export default class Playerlist extends React.Component{
+export default class MainPanel extends React.Component{
 
     constructor(props) {
         super(props);
@@ -83,24 +86,40 @@ export default class Playerlist extends React.Component{
             />
         );
     }
-    // renderCalculate(){
-
-    //     return(
-    //         <div className = "calculator">         
-    //         <form onSubmit={this.handleSubmit}>                   
-    //         Weight: <input className="input" type = "text" name = "weight" placeholder = "" />kg<br></br>
-    //         Height: <input className="input" type = "text" name = "height" placeholder = "" />cm<br></br>
-    //         Age:&nbsp;&nbsp;&nbsp;&nbsp; <input className="input" type = "text" name = "age" placeholder = "" />years old<br></br>
-    //         </form>
-    //         </div>
-
-    //     );
+    renderCalculate(){
+        return(
+            <div className = "calculator">         
+                <form className = "calForm">
+                    <div style={{textAlign:"center", width:"100%"}}>
+                        <p>
+                            <label>Weight: </label>
+                            <input type = "text" name = "weight" placeholder = "" />
+                        </p>  
+                        <p>
+                            <label>Height: </label>
+                            <input type = "text" name = "height" placeholder = "" />
+                        </p>  
+                        <p>
+                            <label>Age: </label>
+                            <input type = "text" name = "age" placeholder = "" />
+                        </p>  
+                        </div>
+                </form>
+            </div>
+        );
+    }
     render(){
         return (
             <div>
-                {this.renderConverter(0, "kg", "lb")}
-                {this.renderConverter(1, "cm", "inch")}
-                {/* {this.renderCalculate()} */}
+                <div className="converterList">
+                    {this.renderConverter(0, "kg", "lb")}
+                    {this.renderConverter(1, "cm", "inch")}
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    {this.renderCalculate()}
+                </div>
             </div>
         );
     }

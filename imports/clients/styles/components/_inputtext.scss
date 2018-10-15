@@ -1,8 +1,37 @@
-.input{
+.convertInput{
 
-    width: 4.5em;
+    width: 10em;
     height:2em; 
     margin:1rem;
     margin-right: 0.5rem;
    
+}
+
+.converterList{
+    text-align: center; /*让div内部文字居中*/
+    background-color: #fff;
+    border-radius: 20px;
+    width: 600px;
+    height: 100px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.calForm p{
+    width: 400px;
+    display: block;
+    margin:5px 0;
+    text-align: center;
+    padding-left: 50px
+}
+.calForm label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+.calForm input{
+    vertical-align: top;
 }
