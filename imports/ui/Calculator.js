@@ -52,7 +52,6 @@ export default class Calculator extends React.Component{
         this.setState({gender: "male"});
     }
     handleFemaleChange(event) {
-        console.log(event.target.value);
         this.setState({gender: "female"});
     }
     render(){
@@ -91,9 +90,9 @@ export default class Calculator extends React.Component{
                             </p>
                             <p>
                                 <label>Gender: </label>
-                                <input type = "radio" name = "gender" onChange={this.handleMaleChanged}
+                                <input type = "radio" name = "gender" onChange={this.handleMaleChange}
                                     defaultChecked={this.state.gender === "male"} /> male     
-                                <input type = "radio" name = "gender" onChange={this.handleFemaleChanged}
+                                <input type = "radio" name = "gender" onChange={this.handleFemaleChange}
                                     defaultChecked={this.state.gender != "male"} /> female
                             </p>
                             <input type="button" value="Submit" onClick={this.handleSubmit}/>  
