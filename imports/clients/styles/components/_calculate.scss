@@ -1,4 +1,4 @@
-.calForm p{
+.calForm p, text{
     width: 400px;
     display: block;
     margin:5px 0;
@@ -10,9 +10,9 @@
     width: 100px;
     text-align: right;
     padding-right: 25px;
-    padding-top: 10px;
+    padding-top: 5px;
 }
-.calForm input{
+.calForm input[type="text"]{
     vertical-align: top;
     width: 150px;
     // &:focus{
@@ -27,6 +27,11 @@
 }
 
 .calForm input[type="reset"]{
+    vertical-align: top;
+    width: 150px;
+    float: right;
+}
+.calForm input[type="submit"]{
     vertical-align: top;
     width: 150px;
     float: right;
