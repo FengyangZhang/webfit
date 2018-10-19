@@ -1,6 +1,7 @@
 import React from 'react';
 import Converter from './../ui/Converter';
 import Calculator from './../ui/Calculator';
+import Accumulate from './../ui/Accumulate';
 
 export default class MainPanel extends React.Component{
 
@@ -16,11 +17,6 @@ export default class MainPanel extends React.Component{
             />
         );
     }
-    renderCalculate(){
-        return (
-            <Calculator/>
-        );
-    }
     render(){
         return (
             <div>
@@ -31,7 +27,10 @@ export default class MainPanel extends React.Component{
                 <br/>
                 <br/>
                 <div className="calculator">
-                    {this.renderCalculate()}
+                    <Calculator/>
+                </div>
+                <div className="itemList">
+                    <Accumulate/>
                 </div>
             </div>
         );

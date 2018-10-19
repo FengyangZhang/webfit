@@ -15,9 +15,6 @@
 .calForm input[type="text"]{
     vertical-align: top;
     width: 150px;
-    // &:focus{
-    //     transform: scale(1.2);
-    // }
     font-size: 20px;
 }
 
@@ -31,8 +28,8 @@
     width: 150px;
     float: right;
 }
-.calForm input[type="submit"]{
+.calForm input[type="button"]{
     vertical-align: top;
     width: 150px;
-    float: right;
+    float: left;
 }

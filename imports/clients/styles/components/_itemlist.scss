@@ -1,0 +1,32 @@
+.itemList input[type="button"]{
+    width: 150px;
+    float: right;
+    border-radius: 15px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(201, 78, 78);
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.itemList input[type="text"] {
+    width: 150px;
+    font-size: 20px;
+}
+
+.itemList input {
+    height: 23px;
+}
+
+
+.itemList p:not(.intro){
+    width: 400px;
+    font-size: 20px;
+    float:left;
+}
+
+.itemList li{
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+
