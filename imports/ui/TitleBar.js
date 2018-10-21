@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 export default class TitleBar extends React.Component{
     renderSubtitle(){
        if (this.props.subtitle){
@@ -8,7 +9,12 @@ export default class TitleBar extends React.Component{
     render(){
         return(
             <div className="title-bar">
+            <div className = "login">
+            <Link to = "/Login">Login</Link>&nbsp;
+            <Link to = "/Signup">Sign Up</Link>
+            </div>
             <div className = "wrapper">
+            
                 <h1>{this.props.title}</h1>
                 
                 {this.renderSubtitle()}
