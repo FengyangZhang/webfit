@@ -8,4 +8,9 @@ Programming language: javascript
 Database: MongoDB
 
 
-<img src="E-R.pdf" width="600" height="600">
+
+\begin{center} <br>
+\includegraphics[width=8in]{E-R.pdf} <br>
+\end{center}
+
+![Image Title](E-R.pdf){width=65%}
