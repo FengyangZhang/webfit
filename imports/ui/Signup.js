@@ -30,7 +30,7 @@ export default class Signup extends React.Component{
                 <input type = "password" ref = "password" name = "password" placeholder = "Password"/>
                 <button> Creat Account </button>
             </form>
-            <Link to = "/"> Already have an account? </Link>
+            <Link to = "/Login"> Already have an account? </Link>
             </div>
        
     );

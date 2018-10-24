@@ -1,67 +1,40 @@
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import React, { Component } from "react";
+import React from 'react';
 import {Link} from 'react-router';
 import TitleBar from './../ui/TitleBar';
 import {Accounts} from 'meteor/accounts-base';
-export default class Login extends React.Component{
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          uid: "",
-          password: ""
-        };
-      }
-    
-      validateForm() {
-        return this.state.uid.length > 0 && this.state.password.length > 0;
-      }
-    
-      handleChange = event => {
-        this.setState({
-          [event.target.id]: event.target.value
-        });
-      }
-    
-      handleSubmit = event => {
-        event.preventDefault();
-      }
-        render(){
-    return (
-        <div>
+import {Meteor} from 'meteor/meteor';
 
-        <TitleBar title = "Lemon fitness"/>
-        <div className="Login">      
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="uid" bsSize="large">
-            <ControlLabel>Username</ControlLabel>
-            <FormControl
-              autoFocus
-              type="uid"
-              value={this.state.uid}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
-          </Button>
-          <Link to = "Signup">Don't have an account?</Link>
-        </form>
-      </div>
-    </div>
+
+export default class Signup extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            error : ''
+        };
+    }
+    onSubmit(e){
+        e.preventDefault();
+        let email = this.refs.email.value.trim();
+        let password = this.refs.password.value.trim();
+        
+        Meteor.loginWithPassword({email},password, (err) => {
+            console.log('Login callback',err);
+        });
+    }
+
+    render(){
+        return (
+            <div>
+            <TitleBar title = "Lemon fitness"/>
+            <form onSubmit = {this.onSubmit.bind(this)}>
+                <input type = "email" ref = "email" name = "email" placeholder = "Email"/>
+                <input type = "password" ref = "password" name = "password" placeholder = "Password"/>
+                <button> Login </button>
+            </form>
+            <Link to = "/Signup"> Don't have an account? </Link>
+            </div>
+       
     );
+
     }
 }

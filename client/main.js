@@ -5,40 +5,36 @@ import {Tracker} from 'meteor/tracker';
 import App from './../imports/ui/App';
 import Signup from './../imports/ui/Signup'
 import Login from './../imports/ui/Login'
-import { Router, Route, browserHistory } from 'react-router'
+import Link from '../imports/ui/Link';
+import Records from '../imports/ui/Records';
+import { Router, Route, browserHistory } from 'react-router';
 
 
+const unauthenticatedPages = ['/','/Signup','/Login'];
+const authenticatedPages = ['/Link','/Records'];
 const routes = (
     <Router history={browserHistory}>
         <Route path="/" component={App} />
         <Route path = "/Signup" component = {Signup}/>
         <Route path = "/Login" component = {Login}/>
+        <Route path = "/Link" component = {Link}/>
+        <Route path = "/Records" component = {Records}/>
     </Router>
   );
 
-Meteor.startup(()=>{
-    Tracker.autorun(()=>{
-        let title = 'Lemon Fitness'
-        let subtitle = 'elva'     
-        // need to be showed in one div.
-        // ReactDOM.render(<App title = {title}/>, document.getElementById('app')); 
-        ReactDOM.render(routes, document.getElementById('app')); 
-    });
-  
-    
+Tracker.autorun(() => {
+    const isAuthenticated = Meteor.userId();
+    const pathname = browserHistory.getCurrentLocation().pathname;
+    const isUnauthenticatedPage = unauthenticatedPages.includes(pathname);
+    const isAuthenticatedPage = authenticatedPages.includes(pathname);
+    if (isUnauthenticatedPage && isAuthenticated){
+        browserHistory.push('/Records');
+    }
+    else if (isAuthenticatedPage && !isAuthenticated){
+        browserHistory.push('/');
+    }
 });
-// Meteor.startup(() => {
-// ReactDOM.render((
-//     <BrowserRouter>
-//         <Route path = "/" component = {App} />
-//         {/* <Route path="/" component={Login}/>
-//         <Route path="/signup" component={Signup}/> */}
-//     </BrowserRouter>
-// ),
-//     document.getElementById('app')
-// );
-// });
-//   Meteor.startup(() => {
-//     ReactDOM.render(routes, document.getElementById('app'));
-//   });
-  
+
+Meteor.startup(()=>{
+        ReactDOM.render(routes, document.getElementById('app'));    
+});
