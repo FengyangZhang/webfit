@@ -26,8 +26,8 @@ export default class Signup extends React.Component{
             <div>
             <TitleBar title = "Lemon fitness"/>
             <form onSubmit = {this.onSubmit.bind(this)}>
-                <input type = "email" ref = "email" name = "email" placeholder = "Email"/>
-                <input type = "password" ref = "password" name = "password" placeholder = "Password"/>
+                <input className = "email" type = "email" ref = "email" name = "email" placeholder = "Email"/>
+                <input className = "password" type = "password" ref = "password" name = "password" placeholder = "Password"/>
                 <button> Creat Account </button>
             </form>
             <Link to = "/Login"> Already have an account? </Link>
