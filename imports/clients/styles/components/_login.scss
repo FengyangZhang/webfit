@@ -1,10 +1,42 @@
-@media all and (min-width: 480px) {
-    .Login {
-      padding: 60px 0;
-    }
+
+
+.Login{
+  text-align: center; /*让div内部文字居中*/
+  background-color: #fff;
+  border-radius: 20px;
+  width: 600px;
+  height: 100px;
+  margin: 300px;
+  top: 0;
+  left: 0;
+  right: 0;
   
-    .Login form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
+}
+.Loginform input{
+  vertical-align: top;
+  width: 150px;
+  font-size: 20px;
+  
+}
+
+.Loginform label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  padding-right: 25px;
+  padding-top: 5px;
+}
+
+.Loginform p, text{
+  width: 400px;
+  display: block;
+  margin:5px 0;
+  text-align: center;
+  padding-left: 50px
+}
+
+.Loginform input[type="button"]{
+  vertical-align: top;
+  width: 150px;
+  float: left;
+}
