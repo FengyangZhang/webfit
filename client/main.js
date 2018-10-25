@@ -5,7 +5,7 @@ import {Tracker} from 'meteor/tracker';
 import App from './../imports/ui/App';
 import Signup from './../imports/ui/Signup'
 import Login from './../imports/ui/Login'
-import Link from '../imports/ui/Link';
+import Logout from '../imports/ui/Logout';
 import Records from '../imports/ui/Records';
 import { Router, Route, browserHistory } from 'react-router';
 
@@ -17,7 +17,7 @@ const routes = (
         <Route path="/" component={App} />
         <Route path = "/Signup" component = {Signup}/>
         <Route path = "/Login" component = {Login}/>
-        <Route path = "/Link" component = {Link}/>
+        <Route path = "/Logout" component = {Logout}/>
         <Route path = "/Records" component = {Records}/>
     </Router>
   );

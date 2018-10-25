@@ -6,8 +6,7 @@ export default class App extends React.Component{
     render(){
         return (
             <div>
-            <TitleBar title = "Lemon fitness"/>
-            
+            <TitleBar title = "Lemon fitness"/>           
             <div className = "wrapper">       
             <MainPanel panel/>
             </div>
