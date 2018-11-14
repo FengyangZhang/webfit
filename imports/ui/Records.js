@@ -8,10 +8,12 @@ import {Meteor} from 'meteor/meteor';
 
 
 export default class App extends React.Component{
+    
     render(){
+        let userId = Meteor.userId(); 
         return (
             <div>
-            <p> hello </p>
+            <p> hello! </p>
             <Logout/>
             </div>
         );
