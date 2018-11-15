@@ -1,9 +1,20 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/users';
+import {Weights} from './../imports/api/weights';
+import {Mongo} from 'meteor/mongo'; 
 
 
 Meteor.startup(() => {
+    
+});
 
+Meteor.methods({
+    'insert': function(id, weight){
+        Weights.insert({userId:id, weight:weight});
+    }
+});
+
+Meteor.publish('weights', function weightsPublication() {
+    return Weights.find();
 });
 
 // return playersList.map(function(player){
