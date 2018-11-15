@@ -8,8 +8,8 @@ export default class Logout extends React.Component{
     }
     render() {
         return(
-          
-                <button onClick={this.onLogout.bind(this)}>Logout</button>
+               
+                <button className = "logoutbutton" onClick={this.onLogout.bind(this)}>Logout</button>
         )
     }
 }

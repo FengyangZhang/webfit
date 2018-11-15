@@ -20,13 +20,16 @@
 
 .calculator{
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
+    height: 180px;
+    
 }
 
 .calForm input[type="reset"]{
     vertical-align: top;
     width: 150px;
     float: right;
+    
 }
 .calForm input[type="button"]{
     vertical-align: top;

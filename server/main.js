@@ -1,12 +1,11 @@
-import {Meteor} from 'meteor/meteor';
-import {Players} from './../imports/api/player';
-import {Mongo} from 'meteor/mongo'; 
-
-Meteor.startup(()=>{
+import { Meteor } from 'meteor/meteor';
+import '../imports/api/users';
 
 
+Meteor.startup(() => {
 
 });
+
 // return playersList.map(function(player){
 //     return <p key={player._id}>{player.name}'s score is {player.score}</p>;
 
