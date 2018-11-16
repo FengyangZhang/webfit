@@ -8,8 +8,8 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
-    'insert': function(id, weight){
-        Weights.insert({userId:id, weight:weight});
+    'insert': function(id, task, score){
+        Weights.insert({userId:id, task:task, score:score});
     }
 });
 
