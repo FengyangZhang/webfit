@@ -6,17 +6,16 @@ import {Accounts} from 'meteor/accounts-base';
 import {Meteor} from 'meteor/meteor';
 import SigninTB from './../ui/SigninTB';
 import {Weights} from './../api/weights';
+import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
-
-export default class Records extends React.Component{
+export default class Records extends TrackerReact(React.Component){
     constructor(props){
         super(props);
-        Meteor.subscribe('weights');        
-        
+        const subscription = Meteor.subscribe('weights');
         this.state = {
             task: "",
             score: "",
-            weightsList: Weights.find({ userId: Meteor.userId() }).fetch(),
+            subscription: subscription,
         };
 
         this.addEntry= this.addEntry.bind(this);
@@ -24,6 +23,9 @@ export default class Records extends React.Component{
         this.handleScoreChange = this.handleScoreChange.bind(this);
     }
 
+    componentWillUnmount() {
+        this.state.subscription.stop();
+    }
     handleTaskChange(event) {
         this.setState({task: event.target.value});
     }
@@ -34,13 +36,13 @@ export default class Records extends React.Component{
 
     addEntry() {
         Meteor.call('insert', Meteor.userId(), this.state.task, this.state.score);
-        this.setState({
-            weightsList: Weights.find({ userId: Meteor.userId() }).fetch(),
-        });
+        // this.setState({
+        //     weightsList: Weights.find({ userId: Meteor.userId() }).fetch(),
+        // });
     }
 
     render(){
-        var myWeights = this.state.weightsList;
+        var myWeights = Weights.find({ userId: Meteor.userId() }).fetch();
         var renderList = myWeights.map((entry, index) => {
             const desc = <p>{'For ' + entry.task + ', your record is ' + entry.score}</p>;
             return (
