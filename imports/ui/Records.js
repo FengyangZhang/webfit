@@ -7,8 +7,37 @@ import {Meteor} from 'meteor/meteor';
 import SigninTB from './../ui/SigninTB';
 import {Weights} from './../api/weights';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import echarts from 'echarts/lib/echarts';
+// 引入柱状图
+import  'echarts/lib/chart/bar';
+// 引入提示框和标题组件
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
 
 export default class Records extends TrackerReact(React.Component){
+    componentDidMount() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var myWeights = Weights.find({ task: "weight lift" }).fetch();
+        console.log(myWeights);
+        
+        const mapToArray = [1,2,3,4,5];
+        // 绘制图表
+        myChart.setOption({
+            title: { text: '小肥桐快看' },
+            tooltip: {},
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: mapToArray,
+            }]
+        });
+    }
     constructor(props){
         super(props);
         const subscription = Meteor.subscribe('weights');
@@ -68,7 +97,7 @@ export default class Records extends TrackerReact(React.Component){
             {scoreInput}
             {addButton}
         </div>
-);
+        );
         return (
         <div>
         <SigninTB title = "Lemon fitness"/>
@@ -76,6 +105,7 @@ export default class Records extends TrackerReact(React.Component){
         {prompt}
         {addPanel}
         {renderList}
+        <div id="main" style={{ width: 400, height: 400 }}></div>
         </div>
         </div>
         );
