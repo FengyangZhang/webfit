@@ -26,6 +26,7 @@ export default class Records extends TrackerReact(React.Component){
     componentWillUnmount() {
         this.state.subscription.stop();
     }
+    
     handleTaskChange(event) {
         this.setState({task: event.target.value});
     }
