@@ -52,7 +52,7 @@ export default class Accumulate extends React.Component{
             if (index == 0) {
                 return (
                     <li key={index}>
-                        <p className="intro">Add an item below.</p>
+                        <p className="intro"></p>
                     </li>
                 );
             }
@@ -84,10 +84,11 @@ export default class Accumulate extends React.Component{
         );
         return (
             <div>
-                <ul>{renderList}</ul>
+                {/* <ul>{renderList}</ul>
                 <br/>
                 <br/>
-                {addPanel}
+                {addPanel} */
+              }
             </div>
         );
     }

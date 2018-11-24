@@ -8,6 +8,7 @@
 }
 
 .converterList{
+    padding: 15px;
     text-align: center; /*让div内部文字居中*/
     background-color: #fff;
     border-radius: 20px;
@@ -17,4 +18,10 @@
     top: 0;
     left: 0;
     right: 0;
+}
+
+.outter{
+   margin-top: 150px;
+   margin-bottom: 450px;
+   
 }
