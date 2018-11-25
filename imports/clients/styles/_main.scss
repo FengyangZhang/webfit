@@ -13,14 +13,17 @@ body{
     color:#555555; // font color
     font-family:Helvetica, Arial, sans-serif; 
     font-size: 1.6rem;
-    height: 80%;
+    height: 100%;
     opacity: 0.8;
     top: 0;
 
    
     
 }
-
+html,body{
+    height: 100%;
+    width: 100%;
+}
 h1{
     font-weight: 300;
     font-size: 2.4rem;

@@ -100,13 +100,13 @@ export default class Records extends TrackerReact(React.Component){
         );
         return (
         <div>
-        <SigninTB title = "Lemon fitness"/>
-        <div className = "wrapper">
-        {prompt}
-        {addPanel}
-        {renderList}
-        <div id="main" style={{ width: 400, height: 400 }}></div>
-        </div>
+            <SigninTB title = "Lemon fitness"/>
+            <div className = "wrapper">
+                {prompt}
+                {addPanel}
+                {renderList}
+                <div id="main" style={{ width: 400, height: 400 }}></div>
+            </div>
         </div>
         );
     }

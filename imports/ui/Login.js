@@ -25,22 +25,22 @@ export default class Signup extends React.Component{
     render(){
         return (
             <div>
-            <TitleBar title = "Lemon fitness"/>
-            <div className = "wrapper">
-            <div className = "Login">
-            <form className = "Loginform" onSubmit = {this.onSubmit.bind(this)}>
-                <p><label>Email: </label><input className = "email" type = "email" ref = "email" name = "email" placeholder = "Email"/></p>
-                <p><label>Password:</label><input className = "password" type = "password" ref = "password" name = "password" placeholder = "Password"/></p>
-                <p><input type = "submit" value="Login"/></p>
-                <p>
-                    <div className = "link">
-                    <Link to = "/Signup"> Don't have an account? </Link> 
-                    </div>  
-                </p>
-            </form>
-            <br/>
-            </div>
-            </div>
+                <TitleBar title = "Lemon fitness"/>
+                <div className = "wrapper">
+                    <div className = "Login">
+                        <form className = "Loginform" onSubmit = {this.onSubmit.bind(this)}>
+                            <p><label>Email: </label><input className = "email" type = "email" ref = "email" name = "email" placeholder = "Email"/></p>
+                            <p><label>Password:</label><input className = "password" type = "password" ref = "password" name = "password" placeholder = "Password"/></p>
+                            <p><input type = "submit" value="Login"/></p>
+                            <p>
+                                <div className = "link">
+                                 <Link to = "/Signup"> Don't have an account? </Link> 
+                                </div>  
+                            </p>
+                        </form>
+                        <br/>
+                    </div>
+                </div>
             </div>
     );
 
