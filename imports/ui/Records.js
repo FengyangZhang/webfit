@@ -107,8 +107,8 @@ export default class Records extends TrackerReact(React.Component){
                 </li>
             );
         }
-        console.log(reclist);
         });
+        console.log(reclist);
 
         //折线图
         
@@ -146,7 +146,7 @@ export default class Records extends TrackerReact(React.Component){
                 {renderList}
                 
                 {/* <div id="main" style={{ width: 400, height: 400 }}></div> */}
-                <Chart />
+                <Chart data={reclist}/>
             </div>
         </div>
         );
