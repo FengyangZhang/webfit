@@ -5,13 +5,55 @@
 .login{
     position: absolute; 
     right: 10px; 
-    top: 10px;
+    top: 20px;
     margin-right:20px; 
    
 }
 
 .logoutbutton{
-    background:#69c9d6;
+    background:#4d99d6;
     color:#ffffff;
+    border: none;
     
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;  
+}
+
+.logintitle{
+    font-size: 15px;
+    color: #ffffff;
+   
+    
+
+}
+
+.addbutton{
+    background: #ffffff;
+    border: 1px solid #555555;
+    color: #555555;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left:1.5rem;
+    margin-right:1.5rem;
+    outline: none;
+    padding:0.3rem;
+    transition: transform .2s ease;
+    border-radius: 50%;
+    height:4rem;
+    width:4rem;
+}
+
+.scoreInput{
+    vertical-align: top;
+    width: 150px;
+    font-size: 20px;
+    margin: 5px;
+    margin-left: 0px;
+}
+.recordstext{
+    color:white;
+    margin: 5px;
+    margin-left: 0px;
 }

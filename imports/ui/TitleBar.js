@@ -10,8 +10,8 @@ export default class TitleBar extends React.Component{
         return(
             <div className="title-bar">
             <div className = "login">
-            <Link to = "/Login">Login</Link>&nbsp;
-            <Link to = "/Signup">Sign Up</Link>
+            <Link to = "/Login" className = "logintitle">Login</Link>&nbsp;
+            <Link to = "/Signup" className = "logintitle">Sign Up</Link>
             </div>
             <div className = "wrapper">
             
