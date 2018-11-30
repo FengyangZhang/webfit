@@ -23,29 +23,7 @@ import 'echarts/lib/component/title';
 
 export default class Records extends TrackerReact(React.Component){
 
-    // componentDidMount() {
-    //     // 基于准备好的dom，初始化echarts实例
-    //     var myChart = echarts.init(document.getElementById('main'));
-
-    //     var myWeights = Weights.find({ task: "weight lift" }).fetch();
-    //     console.log(myWeights);
-        
-    //     const mapToArray = [1,2,3,4,5];
-    //     // 绘制图表
-    //     myChart.setOption({
-    //         title: { text: '' },
-    //         tooltip: {},
-    //         xAxis: {
-    //             data: []
-    //         },
-    //         yAxis: {},
-    //         series: [{
-    //             name: '',
-    //             type: 'bar',
-    //             data: mapToArray,
-    //         }]
-    //     });
-    // }
+ 
     constructor(props){
         super(props);
         const subscription = Meteor.subscribe('weights');
@@ -98,14 +76,14 @@ export default class Records extends TrackerReact(React.Component){
         var i = 0;
         var renderList = myWeights.map((entry, index) => {
             if (entry.task == this.state.selected){
-                reclist.push({'x':i,'y':parseInt(entry.score)});
+                reclist.push({'x':i,'y':parseFloat(entry.score)});
                 i+=1;
             const desc = <p>{entry.score}</p>;
-            return (
-                <li key = {index}>
-                    {desc}
-                </li>
-            );
+            // return (
+            //     <li key = {index}>
+            //         {/* {desc} */}
+            //     </li>
+            // );
         }
         });
         console.log(reclist);
@@ -137,7 +115,11 @@ export default class Records extends TrackerReact(React.Component){
            
             <select className = "select" onChange={this.handleSelectChange.bind(this)} value={this.state.selected}>
             <option value ="weight" selected="selected">Weight</option>
-            <option value ="weight-lifting">Weight-lifting</option>
+            <option value ="Bench">Bench</option>
+            <option value ="Deadpull">Dead pull</option>
+            <option value ="Squat">Squat</option>
+            <option value ="Overhead">Overhead</option>
+
             </select>
             <p className = "recordstext">Your {this.state.selected} Records:</p>
               
@@ -146,6 +128,8 @@ export default class Records extends TrackerReact(React.Component){
                 {renderList}
                 
                 {/* <div id="main" style={{ width: 400, height: 400 }}></div> */}
+                <br></br>
+                <br></br>
                 <Chart data={reclist}/>
             </div>
         </div>
