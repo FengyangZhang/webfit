@@ -6,6 +6,7 @@ import {Accounts} from 'meteor/accounts-base';
 import {Meteor} from 'meteor/meteor';
 import SigninTB from './../ui/SigninTB';
 import {Weights} from './../api/weights';
+import {Posts} from './../api/posts';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import echarts from 'echarts/lib/echarts';
 import Dropdown from 'react-dropdown';
@@ -18,28 +19,29 @@ import  'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 
-
-
-
 export default class Records extends TrackerReact(React.Component){
 
  
     constructor(props){
         super(props);
         const subscription = Meteor.subscribe('weights');
+        const subscription2 = Meteor.subscribe('posts');
+
         this.state = {
             task: "",
             score: "",
             subscription: subscription,
+            subscription2: subscription2,
             selected:"weight",
-
+            post:"",
         };
 
         this.addEntry= this.addEntry.bind(this);
         this.handleTaskChange = this.handleTaskChange.bind(this);
         this.handleScoreChange = this.handleScoreChange.bind(this);
-        this. handleSelectChange = this. handleSelectChange.bind(this);
-        
+        this.handleSelectChange = this. handleSelectChange.bind(this);
+        this.handlepost = this.handlepost.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillUnmount() {
@@ -56,13 +58,20 @@ export default class Records extends TrackerReact(React.Component){
     handleSelectChange(event) {
         this.setState({selected: event.target.value});
     }
-    
+    handlepost(event) {
+        this.setState({post: event.target.value});
+    }
     addEntry() {
         Meteor.call('insert', Meteor.userId(), this.state.selected, this.state.score);
         // this.setState({
         //     weightsList: Weights.find({ userId: Meteor.userId() }).fetch(),
         // });
     }
+    handleSubmit(event) {
+        Meteor.call('insertp', Meteor.userId(),this.state.post);
+        
+    }
+
     handleDropdpwn() {      
         console.log(drop);
      
@@ -71,7 +80,9 @@ export default class Records extends TrackerReact(React.Component){
     render(){
         this.handleDropdpwn;
         var myWeights = Weights.find({ userId: Meteor.userId() }).fetch();
-        console.log(myWeights);
+        var myPosts = Posts.find({ userId: Meteor.userId() }).fetch();
+        console.log(">>>" + myPosts);
+        console.log(">>>" + myWeights);
         var reclist = [];
         var i = 0;
         var renderList = myWeights.map((entry, index) => {
@@ -86,8 +97,17 @@ export default class Records extends TrackerReact(React.Component){
             // );
         }
         });
-        console.log(reclist);
-
+        var renderPosts = myPosts.map((entry, index) => {
+            const desc = <p>{entry.posts}</p>;
+            console.log("hhhh" + myPosts);
+            return (
+                <p className = "postitem" key = {index}>
+                    {desc}
+                </p>
+            );
+        
+        });
+        
         //折线图
         
         const prompt = renderList.length == 0 ? "Start recording~" : "";
@@ -110,9 +130,9 @@ export default class Records extends TrackerReact(React.Component){
         <div>
             <SigninTB title = "Lemon fitness"/>
             
-            <div className = "wrapper">
+            <div className = "wrapper1">
             {/* <Dropdownmenu/> */}
-           
+            <div className = "left">
             <select className = "select" onChange={this.handleSelectChange.bind(this)} value={this.state.selected}>
             <option value ="weight" selected="selected">Weight</option>
             <option value ="Bench">Bench</option>
@@ -129,8 +149,26 @@ export default class Records extends TrackerReact(React.Component){
                 
                 {/* <div id="main" style={{ width: 400, height: 400 }}></div> */}
                 <br></br>
-                <br></br>
+                
+                <div className="chart">
                 <Chart data={reclist}/>
+                </div>
+                </div>
+                <div className = "right">
+                <form className = "saysth">
+                        <div> 
+                            <textarea name = "post"  className = "post" placeholder = "what's on your mind?" onChange ={this.handlepost}></textarea>
+                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>                  
+                        </div>
+                </form>
+                <div className = "preposts">
+                <h2>Posts</h2>
+                {renderPosts}
+
+                </div>
+                
+                </div>
+                
             </div>
         </div>
         );

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import {Weights} from './../imports/api/weights';
+import {Posts} from './../imports/api/posts';
 import {Mongo} from 'meteor/mongo'; 
 
 
@@ -10,11 +11,17 @@ Meteor.startup(() => {
 Meteor.methods({
     'insert': function(id, task, score){
         Weights.insert({userId:id, task:task, score:score});
+    },
+    'insertp': function(id, post){
+        Posts.insert({userId:id, posts:post});
     }
 });
 
 Meteor.publish('weights', function weightsPublication() {
     return Weights.find();
+});
+Meteor.publish('posts', function postsPublication() {
+    return Posts.find();
 });
 
 // return playersList.map(function(player){

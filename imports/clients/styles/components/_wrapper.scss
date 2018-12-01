@@ -6,3 +6,53 @@
    
 
 }
+
+.wrapper1{
+    margin:300px;
+    margin-top: 50px;
+}
+.left{
+    float:left;
+    width:50%;
+    margin:10px;
+    
+}
+.right{
+    width: 500px;
+    height: 510px;
+    float: right;
+    background: white;
+    overflow: scroll;
+}
+.chart{
+    
+    width:auto;
+}
+
+.saysth{
+    margin:20px;
+
+}
+.post{
+    height:60px;
+    width:80%;
+    font-size: 18px;
+    overflow: auto;
+    
+}
+.postbutton{
+    float:right;
+    margin-right:20px;
+    margin-top:45px;
+}
+
+.postitem{
+    margin:8px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: cadetblue;
+   
+  
+}
+.preposts{
+    margin-left:15px;
+}
