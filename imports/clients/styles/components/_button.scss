@@ -23,5 +23,27 @@
         transform: scale(1.2);
     }
 }
+.moodIcon{
+    background: white;
+    border: 1px solid #555555;
+    color: #555555;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+    padding:0.3rem;
+    transition: transform .2s ease;
+    border-radius: 50%;
+    width:4rem;
+
+    &:hover{
+        background: #888888;
+        transform: scale(1.2);        
+    }
+
+    &:active{
+        background: #888888;
+        transform: scale(1.2);
+    }
+}
 
 

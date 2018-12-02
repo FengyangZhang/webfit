@@ -12,8 +12,10 @@ Meteor.methods({
     'insert': function(id, task, score){
         Weights.insert({userId:id, task:task, score:score});
     },
-    'insertp': function(id, post){
-        Posts.insert({userId:id, posts:post});
+    'insertp': function(id, post, m){
+        var curDate = new Date;
+        var curTime = curDate.toLocaleString();
+        Posts.insert({userId:id, posts:post, time: curTime, mood:m});
     }
 });
 

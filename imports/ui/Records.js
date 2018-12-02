@@ -12,6 +12,7 @@ import echarts from 'echarts/lib/echarts';
 import Dropdown from 'react-dropdown';
 import Dropdownmenu from './../ui/Dropdownmenu';
 import Chart from './../ui/chart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // 引入柱状图
 import  'echarts/lib/chart/bar';
@@ -34,6 +35,7 @@ export default class Records extends TrackerReact(React.Component){
             subscription2: subscription2,
             selected:"weight",
             post:"",
+            mood:0,
         };
 
         this.addEntry= this.addEntry.bind(this);
@@ -42,6 +44,7 @@ export default class Records extends TrackerReact(React.Component){
         this.handleSelectChange = this. handleSelectChange.bind(this);
         this.handlepost = this.handlepost.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleMoodChange = this. handleMoodChange.bind(this);
     }
 
     componentWillUnmount() {
@@ -61,28 +64,21 @@ export default class Records extends TrackerReact(React.Component){
     handlepost(event) {
         this.setState({post: event.target.value});
     }
+    handleMoodChange(m) {
+        this.setState({mood: m});
+    }
     addEntry() {
         Meteor.call('insert', Meteor.userId(), this.state.selected, this.state.score);
-        // this.setState({
-        //     weightsList: Weights.find({ userId: Meteor.userId() }).fetch(),
-        // });
+        this.setState({score: ""});        
     }
     handleSubmit(event) {
-        Meteor.call('insertp', Meteor.userId(),this.state.post);
-        
+        Meteor.call('insertp', Meteor.userId(),this.state.post, this.state.mood);
+        this.setState({post: "", mood:0});
     }
 
-    handleDropdpwn() {      
-        console.log(drop);
-     
-    }
-      
     render(){
-        this.handleDropdpwn;
         var myWeights = Weights.find({ userId: Meteor.userId() }).fetch();
-        var myPosts = Posts.find({ userId: Meteor.userId() }).fetch();
-        console.log(">>>" + myPosts);
-        console.log(">>>" + myWeights);
+        var myPosts = Posts.find({ userId: Meteor.userId() }).fetch().reverse();
         var reclist = [];
         var i = 0;
         var renderList = myWeights.map((entry, index) => {
@@ -90,42 +86,104 @@ export default class Records extends TrackerReact(React.Component){
                 reclist.push({'x':i,'y':parseFloat(entry.score)});
                 i+=1;
             const desc = <p>{entry.score}</p>;
-            // return (
-            //     <li key = {index}>
-            //         {/* {desc} */}
-            //     </li>
-            // );
         }
         });
         var renderPosts = myPosts.map((entry, index) => {
-            const desc = <p>{entry.posts}</p>;
-            console.log("hhhh" + myPosts);
+            const desc = entry.posts;
+            const time = entry.time;
+            const icon = ( ()=>{
+                switch(entry.mood) {
+                    case 0: 
+                        break;
+                    case 1:
+                        return (
+                                <FontAwesomeIcon className="moodIcon" icon="smile-wink"/>
+                        );
+                        break;
+                    case 2:
+                        return (
+                                <FontAwesomeIcon className="moodIcon" icon="angry"/>
+                        );
+                        break;
+                    case 3:
+                        return (
+                                <FontAwesomeIcon className="moodIcon" icon="tired"/>
+                        );
+                        break;
+                    case 4:
+                        return (
+                                <FontAwesomeIcon className="moodIcon" icon="sad-cry"/>
+                        );
+                        break;
+                }
+            })();
             return (
                 <p className = "postitem" key = {index}>
-                    {desc}
+                    <div>
+                        {desc+"  @  "}
+                        {time}
+                    </div>
+                    {icon}
                 </p>
             );
         
         });
         
-        //折线图
         
         const prompt = renderList.length == 0 ? "Start recording~" : "";
 
-        // const taskInput = <input className="taskInput" type = "text" value={this.state.selected}
-        //     onChange ={this.handleTaskChange}
-        // />;
-        const scoreInput = <input className="scoreInput" type = "text"  value={this.state.scoreInput}
+        const scoreInput = <input className="scoreInput" type = "text"  value={this.state.score}
             onChange ={this.handleScoreChange}
         />;
         const addButton = <input type="button" value="add" className = "addbutton" onClick={() => this.addEntry()} />;
         const addPanel = (
         <div>
-            {/* {taskInput} */}
             {scoreInput}
             {addButton}
         </div>
         );
+        const submitPanel = ( ()=>{
+            switch(this.state.mood) {
+                case 0: 
+                    return (<div>
+                        <FontAwesomeIcon className="moodIcon" icon="smile-wink" width="10px" onClick={this.handleMoodChange.bind(this, 1)}/>
+                        <FontAwesomeIcon className="moodIcon" icon="angry" width="10px" onClick={this.handleMoodChange.bind(this, 2)}/>
+                        <FontAwesomeIcon className="moodIcon" icon="tired" width="10px" onClick={this.handleMoodChange.bind(this, 3)}/>
+                        <FontAwesomeIcon className="moodIcon" icon="sad-cry" width="10px" onClick={this.handleMoodChange.bind(this, 4)}/>
+                        <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>
+                        </div>
+                    );
+                    break;
+                case 1:
+                    return (<div>
+                            <FontAwesomeIcon className="moodIcon" icon="smile-wink"/>
+                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>
+                            </div>
+                    );
+                    break;
+                case 2:
+                    return (<div>
+                            <FontAwesomeIcon className="moodIcon" icon="angry"/>
+                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>
+                            </div>
+                    );
+                    break;
+                case 3:
+                    return (<div>
+                            <FontAwesomeIcon className="moodIcon" icon="tired"/>
+                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>
+                            </div>
+                    );
+                    break;
+                case 4:
+                    return (<div>
+                            <FontAwesomeIcon className="moodIcon" icon="sad-cry"/>
+                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>
+                            </div>
+                    );
+                    break;
+            }
+        })();
         return (
         <div>
             <SigninTB title = "Lemon fitness"/>
@@ -142,12 +200,9 @@ export default class Records extends TrackerReact(React.Component){
 
             </select>
             <p className = "recordstext">Your {this.state.selected} Records:</p>
-              
                 {prompt}
                 {addPanel}
                 {renderList}
-                
-                {/* <div id="main" style={{ width: 400, height: 400 }}></div> */}
                 <br></br>
                 
                 <div className="chart">
@@ -155,18 +210,17 @@ export default class Records extends TrackerReact(React.Component){
                 </div>
                 </div>
                 <div className = "right">
-                <form className = "saysth">
+                    <form className = "saysth">
                         <div> 
-                            <textarea name = "post"  className = "post" placeholder = "what's on your mind?" onChange ={this.handlepost}></textarea>
-                            <input type="button" className = "postbutton" value="Submit" onClick={this.handleSubmit}/>                  
+                            <textarea name = "post"  className = "post" placeholder = "what's on your mind?" onChange ={this.handlepost} value={this.state.post}></textarea>
+                            {submitPanel}
                         </div>
-                </form>
-                <div className = "preposts">
-                <h2>Posts</h2>
-                {renderPosts}
+                    </form>
+                    <div className = "preposts">
+                    <h2>Posts</h2>
+                    {renderPosts}
 
-                </div>
-                
+                    </div>
                 </div>
                 
             </div>
